@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body {width:1000px;margin: 0 auto}
+		table {margin:0 auto;}
+		td {width:100px;text-align:center;}
+		li {display:inline-block;border:1px solid #ccc;padding:10px;}
+	</style>
+	<meta charset="utf-8">
+</head>
+<body>
+<?php if (isset($_SESSION['me']['id'])) { ?>
+你好 <?php echo $_SESSION['me']['name'] ?> <a href="index.php?c=UserCenter&a=logout">注销</a>
+<?php } else {  ?>
+	<a href="index.php?c=UserCenter&a=login">登录</a>
+<?php } ?>
+
+<table border="1px" cellspacing="0" cellpadding="0"> 
+	<tr>
+		<td>id</td>
+		<td>content</td>
+		<td>i</td>
+		<td>classify</td>
+		<td>createtime</td>
+		<td>handle</td>
+	</tr>
+
+	<?php foreach($data as $key=>$value) { ?>
+	<tr>
+		<td><?php echo $value['id']; ?></td>
+		<td><?php echo mb_substr($value['content'], 0, 19,'utf8'); ?></td>	
+		<td>
+			<img src="<?php echo $value['image']; ?>" width="100" height="auto" alt="no pic">
+		</td>
+		<td><?php echo $value['classify_name']; ?></td>
+		<td><?php echo $value['createtime']; ?></td>
+		<td>
+		<?php if ($value['status'] == 0) { ?>
+			<a href="index.php?c=blog&a=online&id=<?php echo $value['id'] ?>">上线</a>
+		<?php } else { ?>
+			<a href="index.php?c=blog&a=offline&id=<?php echo $value['id'] ?>">下线</a>
+		<?php } ?>
+			<a href="index.php?c=blog&a=edit&id=<?php echo $value['id'] ?>">编辑</a>
+		</td>
+	</tr>
+	<?php } ?>
+</table>
+<div>
+	<ul>
+		<?php for($i=1;$i<=$allPage;$i++) { ?>
+		<li><a href="index.php?c=Blog&a=lists&p=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+		<?php } ?>
+		<!-- <li><a href="index.php?c=Blog&a=lists&p=2">2</a></li>
+		<li><a href="index.php?c=Blog&a=lists&p=3">3</a></li>
+		<li><a href="index.php?c=Blog&a=lists&p=4">4</a></li> -->
+	</ul>
+</div>
+<a href="index.php?c=Blog&a=add">发段子</a>
+</body>
+</html>

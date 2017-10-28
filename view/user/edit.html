@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>修改信息</h1>
+<form  action="index.php?c=User&a=doEdit" method="post" enctype="multipart/form-data">
+	姓名： <input type="text" name="name" value="<?php echo $data['name']?>"><br>
+	邮箱： <input type="text" name="email" value="<?php echo $data['email']?>"><br>
+	密码： <input type="text" name="password" value="<?php echo $data['password']?>"><br>
+	头像： 	<img src="<?php echo $data['image']?>" width="50" height="50">
+	<input type="hidden" name="image"  value="<?php echo $data['image']?>">
+	<input type="file" name="image"><br>
+	<input type="submit" name="">
+	<input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+</form>
+</body>
+</html>
